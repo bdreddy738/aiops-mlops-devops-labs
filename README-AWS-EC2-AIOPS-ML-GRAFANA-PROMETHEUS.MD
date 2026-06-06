@@ -82,6 +82,7 @@ Verify:
 ```bash
 systemctl status docker
 ```
+sudo systemctl start docker
 
 Expected:
 
@@ -404,6 +405,9 @@ For heavier testing:
 
 ```bash
 stress-ng --cpu 4 --timeout 300s
+
+stress-ng --cpu 2 --vm 2 --vm-bytes 400M --timeout 120s
+
 ```
 
 ---
@@ -509,7 +513,9 @@ The implementation is successful when:
 
 
 sudo dnf update -y
+
 sudo dnf install git -y
+
 git --version
 
 git clone https://github.com/bdreddy738/aiops-mlops-devops-labs.git
@@ -517,11 +523,15 @@ git clone https://github.com/bdreddy738/aiops-mlops-devops-labs.git
 cd aiops-mlops-devops-labs/DAY-01/aiops-lab
 
 Install Docker dependencies 
+
 sudo dnf update
 
 sudo dnf install docker -y
+
 sudo systemctl enable docker
+
 sudo systemctl start docker
+
 docker --version
 
 
@@ -534,12 +544,17 @@ chmod +x ~/.docker/cli-plugins/docker-compose
 
 
 docker compose version
+
 systemctl status docker
 
+sudo systemctl start docker
+
 docker-compose up -d
+
 docker ps
 
 Now check Prometheus, Grafana and Slack integration
+
 Security Group (Most Important)
 
 Go to:
@@ -652,6 +667,9 @@ sudo dnf install -y stress-ng
 
 stress-ng --cpu 2 --timeout 120s
 
+stress-ng --cpu 2 --vm 2 --vm-bytes 400M --timeout 120s
+
+
 Compare Results
 CPU utilization in Grafana Dashboard
 
@@ -662,3 +680,23 @@ Slack alert messages
 Terminal output showing CPU Anomaly Detected
 
 Verify end-to-end AIOps pipeline is working successfully
+
+===============================================
+
+
+Verified Working Components
+✅ EC2 Instance
+✅ Node Exporter
+✅ Prometheus
+✅ Grafana
+✅ Python Monitoring Script
+✅ Isolation Forest ML Model
+✅ CPU Monitoring
+✅ Memory Monitoring
+✅ Disk Monitoring
+✅ Network Monitoring
+✅ Stress Testing
+✅ Anomaly Detection
+✅ Slack Notifications
+
+

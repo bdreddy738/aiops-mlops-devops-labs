@@ -6,6 +6,7 @@ import requests
 import time
 import os
 import configparser
+import pandas as pd
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -34,6 +35,9 @@ def get_metric(query):
         response.raise_for_status()
 
         data = response.json()
+
+        if not data["data"]["result"]:
+            return None
 
         return float(
             data["data"]["result"][0]["value"][1]
@@ -66,7 +70,9 @@ if __name__ == "__main__":
         )
 
     if not os.path.exists('config.ini'):
-        exit("❌ config.ini not found")
+        exit(
+            "❌ config.ini not found"
+        )
 
     if SLACK_WEBHOOK == "YOUR_SLACK_WEBHOOK_URL":
         print(
@@ -95,15 +101,24 @@ if __name__ == "__main__":
             network_tx
         ]:
 
-            pred = model.predict(
+            features = pd.DataFrame(
                 [[
                     cpu,
                     memory,
                     disk,
                     network_rx,
                     network_tx
-                ]]
+                ]],
+                columns=[
+                    "cpu_usage",
+                    "memory_usage",
+                    "disk_usage",
+                    "network_rx",
+                    "network_tx"
+                ]
             )
+
+            pred = model.predict(features)
 
             if pred[0] == -1:
 
@@ -119,7 +134,8 @@ Network TX     : {network_tx:.2f}
 
                 print(msg)
 
-                alert_slack(msg)
+                if SLACK_WEBHOOK != "YOUR_SLACK_WEBHOOK_URL":
+                    alert_slack(msg)
 
             else:
 
@@ -127,7 +143,9 @@ Network TX     : {network_tx:.2f}
                     f"✅ Normal | "
                     f"CPU={cpu:.2f}% | "
                     f"Memory={memory:.2f}% | "
-                    f"Disk={disk:.2f}%"
+                    f"Disk={disk:.2f}% | "
+                    f"RX={network_rx:.2f} | "
+                    f"TX={network_tx:.2f}"
                 )
 
         time.sleep(30)
