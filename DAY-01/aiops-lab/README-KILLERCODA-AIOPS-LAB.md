@@ -128,3 +128,8 @@ stress-ng --cpu 2 --timeout 120s
 4. Terminal output showing CPU Anomaly Detected
 
 5. Verify end-to-end AIOps pipeline is working successfully
+
+
+
+
+ 
