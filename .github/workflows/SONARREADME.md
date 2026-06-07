@@ -603,6 +603,76 @@ sonar.sources=DAY-01/aiops-lab
 Directory exists in repository.
 
 ---
+# Step 11A: Configure sonar-scanner.properties
+
+After installing Sonar Scanner, verify the global scanner configuration file.
+
+Location:
+
+```bash
+/opt/sonar-scanner/conf/sonar-scanner.properties
+```
+
+Open file:
+
+```bash
+vi /opt/sonar-scanner/conf/sonar-scanner.properties
+```
+
+Default configuration:
+
+```properties
+#----- Default SonarQube server
+#sonar.host.url=http://localhost:9000
+```
+
+Update as needed:
+
+```properties
+sonar.host.url=http://98.93.100.67:9000
+```
+
+Save and exit.
+
+Verify configuration:
+
+```bash
+cat /opt/sonar-scanner/conf/sonar-scanner.properties
+```
+
+Purpose:
+
+* Global Sonar Scanner configuration
+* Defines default SonarQube server URL
+* Used when executing manual scans from EC2
+* Applies to all projects scanned from this scanner installation
+
+Example manual scan flow:
+
+```bash
+cd /opt/aiops-mlops-devops-labs
+
+sonar-scanner
+```
+
+Difference between configuration files:
+
+| File                     | Purpose               | Scope               |
+| ------------------------ | --------------------- | ------------------- |
+| sonar-scanner.properties | Scanner configuration | Global              |
+| sonar-project.properties | Project configuration | Repository Specific |
+
+Global Configuration:
+
+```text
+/opt/sonar-scanner/conf/sonar-scanner.properties
+```
+
+Project Configuration:
+
+```text
+aiops-mlops-devops-labs/sonar-project.properties
+```
 
 # Final Result
 
