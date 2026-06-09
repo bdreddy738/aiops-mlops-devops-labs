@@ -16,9 +16,3 @@ jobs:
         with:
           target: 'http://54.92.155.35:3000'
           fail_action: false
-
-      - name: Upload ZAP Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: zap-report
-          path: report_html.html
