@@ -673,6 +673,7 @@ Project Configuration:
 ```text
 aiops-mlops-devops-labs/sonar-project.properties
 ```
+https://docs.sonarsource.com/sonarqube-server/9.8/try-out-sonarqube
 
 # Final Result
 
