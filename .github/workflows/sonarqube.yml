@@ -1,9 +1,7 @@
 name: SonarQube Scan
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   sonar:
@@ -24,7 +22,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-      # 👇 THIS IS THE NEWLY ADDED STEP
       - name: SonarQube Quality Gate Check
         uses: sonarsource/sonarqube-quality-gate-action@master
         timeout-minutes: 5
